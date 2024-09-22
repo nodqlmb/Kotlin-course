@@ -13,9 +13,8 @@ fun main(){
     PrintShippingCost(shipping = null)
     PrintShippingCost(shipping = 60.0)
 
-    PrintAtmosphericPressure(atmosphericPressure = 760)
-    PrintAtmosphericPressure(atmosphericPressure = null)
-    val initialIntensity = 100.0
+    PrintAtmosphericPressureReport(atmosphericPressure = 760)
+    PrintAtmosphericPressureReport(atmosphericPressure = null)
 
 
 }
@@ -38,7 +37,7 @@ fun PrintShippingCost(insurance: Double = 0.5, shipping: Double?) {
 //
 //Задача - сообщить об ошибке в случае отсутствия показаний атмосферного давления.
 
-fun PrintAtmosphericPressure(atmosphericPressure: Any?) {
+fun PrintAtmosphericPressureReport(atmosphericPressure: Any?) {
     val atmosphericPressure = (atmosphericPressure ?: "Ошибка")
     println(atmosphericPressure)
 }
