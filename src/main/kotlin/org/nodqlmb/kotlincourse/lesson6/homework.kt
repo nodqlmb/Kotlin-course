@@ -8,6 +8,9 @@ fun main () {
     println(fileType(fileExtension))
     println(Clothes(OutdoorTemperature))
     println(AgeLimitation(age))
+    println(TempConversion(temperature, scale))
+    println(TempConversion(20.0, "C"))
+
 }
 //Задание 1: "Определение Сезона"
 //Контекст: Напишите функцию, которая на основе номера месяца возвращает сезон года.
@@ -90,8 +93,19 @@ fun fileType(fileExtension: String): String {
 //Подсказка: для генерации строки из числа и буквы можно использовать шаблон “$result F” для фаренгейта
 //или “$result C” для цельсия
 
-//ПЕРЕДЕЛАЙ
-
+var temperature: Double = 77.0
+val scale: String = "F"
+fun TempConversion(temperature: Double, scale: String): String {
+    return if (scale == "C") {
+        val result = temperature * 9 / 5 + 32
+        "$result F"
+    } else if (scale == "F") {
+        val result = (temperature - 32) * 5 / 9
+        "$result C"
+    } else {
+        "Invalid scale"
+    }
+}
 
 //Задание 7: "Подбор Одежды по Погоде"
 //Контекст: Напишите функцию, которая на основе температуры воздуха рекомендует тип одежды: "куртка и шапка" при
@@ -121,7 +135,7 @@ val age: Int = 8
     fun AgeLimitation(age: Int): String {
         return when(age) {
             in 0..10 -> "детские"
-            in 11..18 -> "детские, подростковые"
+            in 11..17 -> "детские, подростковые"
             else -> "детские, подростковые, 18+"
         }
     }
