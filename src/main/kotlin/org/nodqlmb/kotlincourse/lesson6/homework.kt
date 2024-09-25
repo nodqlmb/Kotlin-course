@@ -1,71 +1,71 @@
 package org.nodqlmb.kotlincourse.lesson6
 
 fun main () {
-    println(Seasons(month))
-    println(PetToHumanAge(PetAge))
-    println(VehicleofChoice(distance))
-    println(calculateBonus(purchaseamount))
+    println(seasons(month))
+    println(petToHumanAge(petAge))
+    println(vehicleOfChoice(distance))
+    println(calculateBonus(purchaseAmount))
     println(fileType(fileExtension))
-    println(Clothes(OutdoorTemperature))
-    println(AgeLimitation(age))
-    println(TempConversion(temperature, scale))
-    println(TempConversion(20.0, "C"))
+    println(clothes(outdoorTemperature))
+    println(ageLimitation(age))
+    println(tempConversion(temperature, scale))
+    println(tempConversion(20.0, "C"))
 
 }
 //Задание 1: "Определение Сезона"
 //Контекст: Напишите функцию, которая на основе номера месяца возвращает сезон года.
-    val month = 8
-    fun Seasons(month: Int): String {
-        return if (month in 1..2 || month == 12) {
-            "Winter"
-        } else if (month in 3..5) {
-            "Spring"
-        } else if (month in 6..8) {
-            "Summer"
-        } else
-            if (month in 9..11) {
-                "Autumn"
-            } else
-                "Invalid month"
+    var month = 8
+    fun seasons(month: Int): String {
+        return when (month) {
+            in 1..2, 12 -> "Winter"
+            in 3..5 -> "Spring"
+            in 6..8 -> "Summer"
+            in 9..11 -> "Autumn"
+            else -> "Invalid month"
+        }
     }
 //Задание 2: "Расчет Возраста Питомца"
 //Контекст: Создайте функцию, которая преобразует возраст собаки в "человеческие" годы.
 // До 2 лет каждый год собаки равен 10.5 человеческим годам, после - каждый год равен 4 человеческим годам.
-        val PetAge: Int = 4
+        var petAge: Double = 4.0
 
-        fun PetToHumanAge(PetAge: Int): Any {
-            return if (PetAge <= 2) {
-                PetAge * 10.5
-            } else (PetAge - 2) * 4 + 21
+        fun petToHumanAge(petAge: Double): Any {
+            return if (petAge <= 2.0) {
+                petAge * 10.5
+            } else (petAge - 2) * 4 + 21
         }
 
 //Задание 3: "Определение Вида Транспорта"
 //Контекст: Напишите функцию, которая определяет, какой вид транспорта лучше использовать, исходя из длины маршрута.
 // Если маршрут до 1 км - "пешком", до 5 км - "велосипед", иначе - "автотранспорт".
 
-    val distance: Int = 10
+    var distance: Double = 10.0
 
-    fun VehicleofChoice(distance: Int) : String {
-        return if (distance < 1)  {
+    fun vehicleOfChoice(distance: Double) : String {
+        return if (distance < 1.0)  {
             "Walk"
-        } else if (distance in 1..4) {
+        } else if (distance in 1.0..4.0) {
             "Ride a bike"
         } else {
             "Drive a car"
         }
     }
+//Поменяй в предыдущих двух на double
 
 //Задание 4: "Расчет Бонусных Баллов"
 //Контекст: Клиенты интернет-магазина получают бонусные баллы за покупки.
 //Напишите функцию, которая принимает сумму покупки и возвращает количество бонусных баллов:
 //2 балла за каждые 100 рублей при сумме покупки до 1000 рублей и 5 баллов за каждые 100 рублей при сумме свыше этого.
 
-val purchaseamount: Int = 1666 //
+var purchaseAmount: Int = 1666 //
 
-fun calculateBonus(purchaseamount: Int) : Int {
+fun calculateBonus(purchaseAmount: Int) : Int {
+   //если нужно проверить валидность и вбросить исключение, то его сюда
+    //второй строкой можно создать переменную для сокращения кода
+    //например val dif = purchaseAmount / 100
     return when  {
-        purchaseamount < 1000 -> purchaseamount / 100 * 2
-        purchaseamount >= 1000 -> purchaseamount / 100 * 5
+        purchaseAmount < 1000 -> purchaseAmount / 100 * 2
+        purchaseAmount >= 1000 -> purchaseAmount / 100 * 5
         else -> 0
     }
 }
@@ -76,7 +76,7 @@ fun calculateBonus(purchaseamount: Int) : Int {
 //которая на основе расширения файла возвращает его тип: "Текстовый документ", "Изображение",
 //"Таблица" или "Неизвестный тип".
 
-val fileExtension: String = ".xls"
+var fileExtension: String = ".xls"
 fun fileType(fileExtension: String): String {
         return when (fileExtension) {
             in "txt", "doc", "docx" -> "Текстовый документ"
@@ -94,16 +94,20 @@ fun fileType(fileExtension: String): String {
 //или “$result C” для цельсия
 
 var temperature: Double = 77.0
-val scale: String = "F"
-fun TempConversion(temperature: Double, scale: String): String {
-    return if (scale == "C") {
-        val result = temperature * 9 / 5 + 32
-        "$result F"
-    } else if (scale == "F") {
-        val result = (temperature - 32) * 5 / 9
-        "$result C"
-    } else {
-        "Invalid scale"
+var scale: String = "F"
+fun tempConversion(temperature: Double, scale: String): String {
+    return when (scale) {
+        "C" -> {
+            val result = temperature * 9 / 5 + 32
+            "$result F"
+        }
+        "F" -> {
+            val result = (temperature - 32) * 5 / 9
+            "$result C"
+        }
+        else -> {
+            "Invalid scale"
+        }
     }
 }
 
@@ -112,17 +116,14 @@ fun TempConversion(temperature: Double, scale: String): String {
 //температуре ниже 0, "ветровка" от 0 до 15 градусов и "футболка и шорты" при температуре выше 15.
 //При температурах ниже -30 и выше +35 рекомендуйте не выходить из дома.
 
-    val OutdoorTemperature: Int = 8
+    var outdoorTemperature: Int = 8
 
-    fun Clothes(OutdoorTemperature: Int) : String {
-        return if (OutdoorTemperature in -30..0) {
-            "куртка и шапка"
-        } else if (OutdoorTemperature in 0..14)  {
-            "ветровка"
-        } else if (OutdoorTemperature in 15..35)  {
-            "футболка и шорты"
-        } else {
-            "сидим дома"
+    fun clothes(outdoorTemperature: Int) : String {
+        return when (outdoorTemperature) {
+            in -30..0 -> "куртка и шапка"
+            in 0..14 -> "ветровка"
+            in 15..35 -> "футболка и шорты"
+            else -> "сидим дома"
         }
     }
 
@@ -131,11 +132,13 @@ fun TempConversion(temperature: Double, scale: String): String {
 // Напишите функцию, которая принимает возраст зрителя и возвращает доступные для него категории фильмов: "детские",
 // "подростковые", "18+".
 
-val age: Int = 8
-    fun AgeLimitation(age: Int): String {
+var age: Int = 8
+    fun ageLimitation(age: Int): String {
         return when(age) {
             in 0..10 -> "детские"
             in 11..17 -> "детские, подростковые"
             else -> "детские, подростковые, 18+"
         }
     }
+
+
